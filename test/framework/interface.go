@@ -42,7 +42,6 @@ type kumaDeploymentOptions struct {
 	zoneEgress                  bool
 	zoneEgressEnvoyAdminTunnel  bool
 	cni                         bool
-	cniV1                       bool
 	cpReplicas                  int
 	hdsDisabled                 bool
 	runPostgresMigration        bool
@@ -314,15 +313,9 @@ func WithEgress() KumaDeploymentOption {
 	})
 }
 
-func WithCNI(version ...CNIVersion) KumaDeploymentOption {
-	if len(version) > 1 {
-		panic("only one arg is supported")
-	}
+func WithCNI() KumaDeploymentOption {
 	return KumaOptionFunc(func(o *kumaDeploymentOptions) {
 		o.cni = true
-		if len(version) == 1 && version[0] == CNIVersion1 {
-			o.cniV1 = true
-		}
 	})
 }
 
