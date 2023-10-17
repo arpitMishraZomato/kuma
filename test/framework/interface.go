@@ -47,7 +47,6 @@ type kumaDeploymentOptions struct {
 	hdsDisabled                 bool
 	runPostgresMigration        bool
 	yamlConfig                  string
-	transparentProxyV1          bool
 	apiHeaders                  []string
 	zoneName                    string
 	verifyKuma                  bool
@@ -64,7 +63,6 @@ func (k *kumaDeploymentOptions) apply(opts ...KumaDeploymentOption) {
 	k.installationMode = KumactlInstallationMode
 	k.env = map[string]string{}
 	k.meshUpdateFuncs = map[string][]func(*mesh_proto.Mesh) *mesh_proto.Mesh{}
-	k.transparentProxyV1 = false
 	k.verifyKuma = true
 	k.setupKumactl = true
 
@@ -115,7 +113,6 @@ type appDeploymentOptions struct {
 	appendDataplaneConfig string
 	boundToContainerIp    bool
 	serviceAddress        string
-	transparentProxyV1    bool
 	dpEnvs                map[string]string
 
 	dockerVolumes       []string
@@ -509,13 +506,6 @@ func WithToken(token string) AppDeploymentOption {
 func WithTransparentProxy(transparent bool) AppDeploymentOption {
 	return AppOptionFunc(func(o *appDeploymentOptions) {
 		o.transparent = &transparent
-	})
-}
-
-func WithTransparentProxyV1(transparent bool) AppDeploymentOption {
-	return AppOptionFunc(func(o *appDeploymentOptions) {
-		o.transparent = &transparent
-		o.transparentProxyV1 = true
 	})
 }
 

@@ -9,7 +9,7 @@ does not have any particular instructions.
 ## Upgrade to `2.5.x`
 
 
-### Transparent-proxy v1 removal
+### Transparent-proxy and CNI v1 removal
 
 v2 has been default since 2.2.x. We are therefore removing v1 
 
