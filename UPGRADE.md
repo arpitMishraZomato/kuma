@@ -8,7 +8,12 @@ does not have any particular instructions.
 
 ## Upgrade to `2.5.x`
 
-#### More strict validation rules for resource names
+
+### Transparent-proxy v1 removal
+
+v2 has been default since 2.2.x. We are therefore removing v1 
+
+### More strict validation rules for resource names
 
 In order to be compatible with Kubernetes naming policy we updated the validation rules. Old rule:
 
@@ -20,18 +25,18 @@ New rule:
 
 New rule is applied for CREATE operations. The old rule is still applied for UPDATE, but this is going to change in Kuma 2.7.x or later.
 
+### Deprecated argument
+
+Parameters `--exclude-outbound-tcp-ports-for-uids` and `--exclude-outbound-udp-ports-for-uids` are now merged into `--exclude-outbound-ports-for-uids` for `kumactl install transparent-proxy`.
+We've also added the matching Kubernetes annotation: `traffic.kuma.io/exclude-outbound-ports-for-uids`.
+The previous versions will still work but will be removed in the future.
+
 ## Upgrade to `2.4.x`
 
 ### Configuration change
 
 The configuration: `Metrics.Mesh.MinResyncTimeout` and `Metrics.Mesh.MaxResyncTimeout` are replaced by `Metrics.Mesh.MinResyncInterval` and `Metrics.Mesh.FullResyncInterval`.
 You can still use the current configs but it will be removed in the future.
-
-### Deprecated argument
-
-Parameters `--exclude-outbound-tcp-ports-for-uids` and `--exclude-outbound-udp-ports-for-uids` are now merged into `--exclude-outbound-ports-for-uids` for `kumactl install transparent-proxy`.
-We've also added the matching Kubernetes annotation: `traffic.kuma.io/exclude-outbound-ports-for-uids`.
-The previous versions will still work but will be removed in the future.
 
 ### **Breaking changes**
 
